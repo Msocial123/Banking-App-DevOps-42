@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Clahan-Bank | Digital Banking</title>
+
+    <!-- Twind -->
+    <script src="https://cdn.jsdelivr.net/npm/@twind/core@1.1.3/dist/twind.core.global.min.js"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: #f5f9ff;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .hero-gradient {
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(96, 165, 250, 0.35),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f3d91 0%,
+                    #1456c3 45%,
+                    #1d75e8 100%
+                );
+        }
+
+        .card-hover {
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 20px 35px rgba(15, 61, 145, 0.12);
+        }
+
+        .active-tab {
+            color: #1255bd !important;
+            border-bottom: 3px solid #1255bd;
+            background: #eff6ff;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-navigation {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+<!-- ========================================================= -->
+<!-- TOP INFORMATION BAR -->
+<!-- ========================================================= -->
+
+<div class="bg-blue-950 text-white text-sm">
+    <div
+        class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row
+        justify-between items-center gap-2"
+    >
+        <div>
+            Welcome to <strong>Clahan-Bank</strong> — Banking made simple.
+        </div>
+
+        <div class="flex gap-5">
+            <span>Customer Care: 1800-CLAHAN</span>
+            <span class="hidden md:inline">24 × 7 Banking</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========================================================= -->
+<!-- HEADER -->
+<!-- ========================================================= -->
+
+<header class="sticky top-0 z-50 glass border-b border-blue-100">
+
+    <div
+        class="max-w-7xl mx-auto px-4 py-4
+        flex items-center justify-between"
+    >
+
+        <!-- Logo -->
+
+        <div
+            class="flex items-center gap-3 cursor-pointer"
+            onclick="showHome()"
+        >
+
+            <div
+                class="w-11 h-11 rounded-xl
+                bg-blue-700 text-white
+                flex items-center justify-center
+                font-bold text-xl shadow-lg"
+            >
+                C
+            </div>
+
+            <div>
+                <h1 class="text-2xl font-bold text-blue-900">
+                    Clahan<span class="text-blue-600">-Bank</span>
+                </h1>
+
+                <p class="text-xs text-slate-500">
+                    Banking Beyond Boundaries
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Desktop Navigation -->
+
+        <nav class="desktop-navigation flex items-center gap-1">
+
+            <button
+                onclick="showHome()"
+                id="tab-home"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                Home
+            </button>
+
+            <button
+                onclick="showPage('registration')"
+                id="tab-registration"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                User Registration
+            </button>
+
+            <button
+                onclick="showPage('signin')"
+                id="tab-signin"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                Sign In
+            </button>
+
+            <button
+                onclick="showPage('savings')"
+                id="tab-savings"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                Savings Account
+            </button>
+
+            <button
+                onclick="showPage('current')"
+                id="tab-current"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                Current Account
+            </button>
+
+            <button
+                onclick="showPage('nri')"
+                id="tab-nri"
+                class="nav-tab px-4 py-3 rounded-lg
+                font-medium text-slate-600 hover:text-blue-700
+                hover:bg-blue-50 transition"
+            >
+                NRI Account
+            </button>
+
+        </nav>
+
+
+        <!-- Mobile Menu -->
+
+        <button
+            onclick="toggleMobileMenu()"
+            class="mobile-menu text-blue-800 text-2xl"
+        >
+            ☰
+        </button>
+
+    </div>
+
+
+    <!-- Mobile Navigation -->
+
+    <div
+        id="mobileNavigation"
+        class="hidden border-t border-blue-100 bg-white px-4 pb-4"
+    >
+
+        <div class="flex flex-col gap-2 pt-3">
+
+            <button onclick="showHome()" class="mobile-nav-button">
+                Home
+            </button>
+
+            <button onclick="showPage('registration')" class="mobile-nav-button">
+                User Registration
+            </button>
+
+            <button onclick="showPage('signin')" class="mobile-nav-button">
+                Sign In
+            </button>
+
+            <button onclick="showPage('savings')" class="mobile-nav-button">
+                Savings Account
+            </button>
+
+            <button onclick="showPage('current')" class="mobile-nav-button">
+                Current Account
+            </button>
+
+            <button onclick="showPage('nri')" class="mobile-nav-button">
+                NRI Account
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================================= -->
+<!-- DYNAMIC APPLICATION CONTENT -->
+<!-- ========================================================= -->
+
+<main id="app">
+
+    <!-- ===================================================== -->
+    <!-- HOME PAGE -->
+    <!-- ===================================================== -->
+
+    <section id="homePage">
+
+        <!-- HERO -->
+
+        <section class="hero-gradient text-white">
+
+            <div
+                class="max-w-7xl mx-auto px-4 py-20
+                grid lg:grid-cols-2 gap-12 items-center"
+            >
+
+                <div>
+
+                    <span
+                        class="inline-block px-4 py-2 mb-6
+                        bg-white/15 rounded-full text-sm
+                        border border-white/20"
+                    >
+                        ✨ Smart • Secure • Digital Banking
+                    </span>
+
+                    <h2
+                        class="text-4xl md:text-6xl
+                        font-extrabold leading-tight mb-6"
+                    >
+                        Banking that moves
+                        <span class="text-blue-200">
+                            with you.
+                        </span>
+                    </h2>
+
+                    <p
+                        class="text-lg text-blue-100
+                        max-w-xl mb-8 leading-relaxed"
+                    >
+                        Experience a smarter way to manage your money
+                        with Clahan-Bank. Secure digital banking,
+                        flexible accounts and simple financial solutions
+                        designed around you.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <button
+                            onclick="showPage('registration')"
+                            class="bg-white text-blue-800
+                            px-7 py-3 rounded-xl
+                            font-bold hover:bg-blue-50
+                            transition shadow-lg"
+                        >
+                            Open an Account
+                        </button>
+
+                        <button
+                            onclick="showPage('signin')"
+                            class="border border-white/60
+                            px-7 py-3 rounded-xl
+                            font-bold hover:bg-white/10
+                            transition"
+                        >
+                            Internet Banking
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO BANK CARD -->
+
+                <div class="flex justify-center">
+
+                    <div
+                        class="relative w-full max-w-md
+                        bg-white/10 border border-white/20
+                        rounded-3xl p-7 shadow-2xl
+                        backdrop-blur-xl"
+                    >
+
+                        <div class="flex justify-between items-start">
+
+                            <div>
+                                <p class="text-blue-100 text-sm">
+                                    Clahan-Bank
+                                </p>
+
+                                <p class="text-xl font-bold">
+                                    Premium Banking
+                                </p>
+                            </div>
+
+                            <div class="text-3xl">
+                                ◉
+                            </div>
+
+                        </div>
+
+
+                        <div class="mt-12">
+
+                            <p class="text-blue-100 text-sm">
+                                Available Balance
+                            </p>
+
+                            <p class="text-4xl font-bold mt-2">
+                                ₹ 2,48,560.00
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="mt-10 flex justify-between
+                            text-sm text-blue-100"
+                        >
+
+                            <span>
+                                **** **** **** 4829
+                            </span>
+
+                            <span>
+                                09/30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="max-w-7xl mx-auto px-4 py-10">
+
+            <div
+                class="bg-white rounded-2xl shadow-sm
+                border border-blue-100 p-6"
+            >
+
+                <div class="flex items-center justify-between mb-6">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-950">
+                            Quick Banking
+                        </h3>
+
+                        <p class="text-sm text-slate-500">
+                            Access frequently used banking services
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6
+                    gap-4"
+                >
+
+                    <button onclick="showPage('registration')"
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center">
+
+                        <div class="text-2xl mb-2">👤</div>
+                        <span class="font-semibold text-blue-900">
+                            Register
+                        </span>
+
+                    </button>
+
+
+                    <button onclick="showPage('signin')"
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center">
+
+                        <div class="text-2xl mb-2">🔐</div>
+                        <span class="font-semibold text-blue-900">
+                            Sign In
+                        </span>
+
+                    </button>
+
+
+                    <button onclick="showPage('savings')"
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center">
+
+                        <div class="text-2xl mb-2">💰</div>
+                        <span class="font-semibold text-blue-900">
+                            Savings
+                        </span>
+
+                    </button>
+
+
+                    <button onclick="showPage('current')"
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center">
+
+                        <div class="text-2xl mb-2">🏢</div>
+                        <span class="font-semibold text-blue-900">
+                            Current
+                        </span>
+
+                    </button>
+
+
+                    <button onclick="showPage('nri')"
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center">
+
+                        <div class="text-2xl mb-2">🌎</div>
+                        <span class="font-semibold text-blue-900">
+                            NRI Banking
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="p-5 rounded-xl bg-blue-50
+                        hover:bg-blue-100 transition text-center"
+                    >
+
+                        <div class="text-2xl mb-2">📞</div>
+                        <span class="font-semibold text-blue-900">
+                            Support
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT PRODUCTS -->
+
+        <section class="max-w-7xl mx-auto px-4 py-12">
+
+            <div class="text-center mb-10">
+
+                <p class="text-blue-600 font-semibold">
+                    BANKING PRODUCTS
+                </p>
+
+                <h2
+                    class="text-3xl md:text-4xl
+                    font-bold text-blue-950 mt-2"
+                >
+                    Banking solutions for every need
+                </h2>
+
+                <p
+                    class="text-slate-500 max-w-2xl
+                    mx-auto mt-4"
+                >
+                    Choose the account that fits your personal,
+                    business or international banking requirements.
+                </p>
+
+            </div>
+
+
+            <div
+                class="grid md:grid-cols-3 gap-6"
+            >
+
+                <!-- Savings -->
+
+                <div
+                    class="bg-white rounded-2xl p-7
+                    border border-blue-100
+                    card-hover"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl
+                        bg-blue-100 flex items-center
+                        justify-center text-2xl mb-5"
+                    >
+                        💰
+                    </div>
+
+                    <h3 class="text-xl font-bold text-blue-950">
+                        Savings Account
+                    </h3>
+
+                    <p class="text-slate-500 mt-3 leading-relaxed">
+                        Manage your everyday finances with a
+                        secure savings account and convenient
+                        digital banking services.
+                    </p>
+
+                    <button
+                        onclick="showPage('savings')"
+                        class="mt-6 text-blue-700
+                        font-semibold hover:text-blue-900"
+                    >
+                        Explore Savings →
+                    </button>
+
+                </div>
+
+
+                <!-- Current -->
+
+                <div
+                    class="bg-white rounded-2xl p-7
+                    border border-blue-100
+                    card-hover"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl
+                        bg-blue-100 flex items-center
+                        justify-center text-2xl mb-5"
+                    >
+                        🏢
+                    </div>
+
+                    <h3 class="text-xl font-bold text-blue-950">
+                        Current Account
+                    </h3>
+
+                    <p class="text-slate-500 mt-3 leading-relaxed">
+                        Business-focused banking solutions designed
+                        for frequent transactions and operational
+                        flexibility.
+                    </p>
+
+                    <button
+                        onclick="showPage('current')"
+                        class="mt-6 text-blue-700
+                        font-semibold hover:text-blue-900"
+                    >
+                        Explore Current →
+                    </button>
+
+                </div>
+
+
+                <!-- NRI -->
+
+                <div
+                    class="bg-white rounded-2xl p-7
+                    border border-blue-100
+                    card-hover"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl
+                        bg-blue-100 flex items-center
+                        justify-center text-2xl mb-5"
+                    >
+                        🌎
+                    </div>
+
+                    <h3 class="text-xl font-bold text-blue-950">
+                        NRI Account
+                    </h3>
+
+                    <p class="text-slate-500 mt-3 leading-relaxed">
+                        Convenient banking services for customers
+                        living and working outside India.
+                    </p>
+
+                    <button
+                        onclick="showPage('nri')"
+                        class="mt-6 text-blue-700
+                        font-semibold hover:text-blue-900"
+                    >
+                        Explore NRI Banking →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section class="bg-blue-950 text-white">
+
+            <div
+                class="max-w-7xl mx-auto px-4 py-16
+                grid md:grid-cols-3 gap-8"
+            >
+
+                <div>
+
+                    <div class="text-3xl mb-4">
+                        🔒
+                    </div>
+
+                    <h3 class="text-xl font-bold">
+                        Secure Banking
+                    </h3>
+
+                    <p class="text-blue-200 mt-3">
+                        Multi-layer security designed to protect
+                        your account and financial information.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div class="text-3xl mb-4">
+                        ⚡
+                    </div>
+
+                    <h3 class="text-xl font-bold">
+                        Digital First
+                    </h3>
+
+                    <p class="text-blue-200 mt-3">
+                        Access your banking services whenever
+                        and wherever you need them.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div class="text-3xl mb-4">
+                        🤝
+                    </div>
+
+                    <h3 class="text-xl font-bold">
+                        Customer Support
+                    </h3>
+
+                    <p class="text-blue-200 mt-3">
+                        Get assistance through our digital and
+                        customer support channels.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- DYNAMIC PAGE CONTAINER -->
+    <!-- ===================================================== -->
+
+    <section
+        id="dynamicPage"
+        class="hidden min-h-screen py-12 px-4"
+    >
+
+        <div
+            id="dynamicContent"
+            class="max-w-6xl mx-auto"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-slate-950 text-slate-300">
+
+    <div
+        class="max-w-7xl mx-auto px-4 py-12
+        grid md:grid-cols-4 gap-10"
+    >
+
+        <div>
+
+            <h3 class="text-xl font-bold text-white">
+                Clahan<span class="text-blue-400">-Bank</span>
+            </h3>
+
+            <p class="mt-4 text-sm leading-relaxed">
+                A modern digital banking experience designed
+                for individuals, businesses and global customers.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4 class="text-white font-semibold mb-4">
+                Banking
+            </h4>
+
+            <div class="space-y-3 text-sm">
+
+                <button
+                    onclick="showPage('savings')"
+                    class="block hover:text-blue-400"
+                >
+                    Savings Account
+                </button>
+
+                <button
+                    onclick="showPage('current')"
+                    class="block hover:text-blue-400"
+                >
+                    Current Account
+                </button>
+
+                <button
+                    onclick="showPage('nri')"
+                    class="block hover:text-blue-400"
+                >
+                    NRI Account
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h4 class="text-white font-semibold mb-4">
+                Customer
+            </h4>
+
+            <div class="space-y-3 text-sm">
+
+                <button
+                    onclick="showPage('registration')"
+                    class="block hover:text-blue-400"
+                >
+                    User Registration
+                </button>
+
+                <button
+                    onclick="showPage('signin')"
+                    class="block hover:text-blue-400"
+                >
+                    Sign In
+                </button>
+
+                <span class="block">
+                    Customer Support
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h4 class="text-white font-semibold mb-4">
+                Contact
+            </h4>
+
+            <p class="text-sm">
+                1800-CLAHAN
+            </p>
+
+            <p class="text-sm mt-2">
+                support@clahan-bank.example
+            </p>
+
+            <p class="text-sm mt-2">
+                24 × 7 Digital Banking
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="border-t border-slate-800
+        text-center py-5 text-sm"
+    >
+        © 2026 Clahan-Bank. All rights reserved.
+    </div>
+
+</footer>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    /*
+     * =========================================================
+     * CLAHAN-BANK FRONTEND APPLICATION
+     * =========================================================
+     *
+     * This JavaScript layer provides dynamic page rendering.
+     *
+     * Later this can be replaced/extended with:
+     *
+     * - React
+     * - Angular
+     * - Vue
+     * - Node.js APIs
+     * - Spring Boot APIs
+     * - .NET APIs
+     * - Python FastAPI
+     *
+     * =========================================================
+     */
+
+
+    const pages = {
+
+        registration: {
+
+            title: "Create Your Clahan-Bank Account",
+
+            description:
+                "Register with Clahan-Bank and start your digital banking journey.",
+
+            icon: "👤",
+
+            content: `
+
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+                    <div>
+
+                        <span class="text-blue-600 font-semibold">
+                            NEW CUSTOMER
+                        </span>
+
+                        <h2 class="text-4xl font-bold text-blue-950 mt-3">
+                            Create your account
+                        </h2>
+
+                        <p class="text-slate-500 mt-4 leading-relaxed">
+                            Complete your registration to access
+                            Clahan-Bank digital banking services.
+                        </p>
+
+                        <div class="mt-8 space-y-4">
+
+                            <div class="flex gap-3">
+                                <span>✓</span>
+                                <span>Secure digital registration</span>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <span>✓</span>
+                                <span>Multiple account options</span>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <span>✓</span>
+                                <span>24 × 7 digital access</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="bg-white rounded-2xl p-7 shadow-sm
+                        border border-blue-100">
+
+                        <h3 class="text-xl font-bold text-blue-950 mb-6">
+                            Customer Registration
+                        </h3>
+
+                        <form onsubmit="registerUser(event)">
+
+                            <div class="grid md:grid-cols-2 gap-4">
+
+                                <input
+                                    required
+                                    type="text"
+                                    placeholder="First Name"
+                                    class="input-field"
+                                />
+
+                                <input
+                                    required
+                                    type="text"
+                                    placeholder="Last Name"
+                                    class="input-field"
+                                />
+
+                            </div>
+
+                            <input
+                                required
+                                type="email"
+                                placeholder="Email Address"
+                                class="input-field"
+                            />
+
+                            <input
+                                required
+                                type="tel"
+                                placeholder="Mobile Number"
+                                class="input-field"
+                            />
+
+                            <input
+                                required
+                                type="password"
+                                placeholder="Create Password"
+                                class="input-field"
+                            />
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Create Account
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            `
+        },
+
+
+        signin: {
+
+            title: "Secure Sign In",
+
+            description:
+                "Access your Clahan-Bank digital banking account.",
+
+            icon: "🔐",
+
+            content: `
+
+                <div class="max-w-md mx-auto">
+
+                    <div class="bg-white rounded-2xl p-8
+                        shadow-sm border border-blue-100">
+
+                        <div class="text-center mb-8">
+
+                            <div class="text-4xl">
+                                🔐
+                            </div>
+
+                            <h2 class="text-3xl font-bold
+                                text-blue-950 mt-4">
+                                Welcome Back
+                            </h2>
+
+                            <p class="text-slate-500 mt-2">
+                                Sign in to your Clahan-Bank account
+                            </p>
+
+                        </div>
+
+                        <form onsubmit="loginUser(event)">
+
+                            <input
+                                required
+                                type="text"
+                                placeholder="Customer ID / Email"
+                                class="input-field"
+                            />
+
+                            <input
+                                required
+                                type="password"
+                                placeholder="Password"
+                                class="input-field"
+                            />
+
+                            <div class="flex justify-between
+                                items-center text-sm mb-5">
+
+                                <label class="flex gap-2">
+                                    <input type="checkbox">
+                                    Remember me
+                                </label>
+
+                                <button
+                                    type="button"
+                                    class="text-blue-600"
+                                >
+                                    Forgot Password?
+                                </button>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Sign In
+                            </button>
+
+                        </form>
+
+                        <p class="text-center text-sm
+                            text-slate-500 mt-6">
+
+                            New customer?
+
+                            <button
+                                onclick="showPage('registration')"
+                                class="text-blue-600 font-semibold"
+                            >
+                                Register Now
+                            </button>
+
+                        </p>
+
+                    </div>
+
+                </div>
+            `
+        },
+
+
+        savings: {
+
+            title: "Savings Account",
+
+            description:
+                "Simple and flexible banking for your everyday financial needs.",
+
+            icon: "💰",
+
+            content: `
+
+                <div>
+
+                    <div class="hero-gradient rounded-3xl
+                        text-white p-10 mb-10">
+
+                        <span class="text-blue-200 font-semibold">
+                            PERSONAL BANKING
+                        </span>
+
+                        <h2 class="text-4xl font-bold mt-3">
+                            Savings Account
+                        </h2>
+
+                        <p class="text-blue-100 max-w-2xl mt-4">
+                            Build your financial future with a secure,
+                            convenient and digitally accessible
+                            savings account.
+                        </p>
+
+                        <button
+                            onclick="showPage('registration')"
+                            class="mt-7 bg-white text-blue-800
+                            px-6 py-3 rounded-xl font-bold"
+                        >
+                            Open Savings Account
+                        </button>
+
+                    </div>
+
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        ${productFeature(
+                            "💳",
+                            "Easy Banking",
+                            "Access your account through digital banking channels."
+                        )}
+
+                        ${productFeature(
+                            "📱",
+                            "Digital Access",
+                            "Manage your banking needs through secure online services."
+                        )}
+
+                        ${productFeature(
+                            "🔒",
+                            "Secure",
+                            "Designed with multiple security controls."
+                        )}
+
+                    </div>
+
+                </div>
+            `
+        },
+
+
+        current: {
+
+            title: "Current Account",
+
+            description:
+                "Banking solutions designed for business and frequent transactions.",
+
+            icon: "🏢",
+
+            content: `
+
+                <div>
+
+                    <div class="bg-blue-900 rounded-3xl
+                        text-white p-10 mb-10">
+
+                        <span class="text-blue-200 font-semibold">
+                            BUSINESS BANKING
+                        </span>
+
+                        <h2 class="text-4xl font-bold mt-3">
+                            Current Account
+                        </h2>
+
+                        <p class="text-blue-100 max-w-2xl mt-4">
+                            Flexible banking for businesses,
+                            entrepreneurs and organizations.
+                        </p>
+
+                        <button
+                            onclick="showPage('registration')"
+                            class="mt-7 bg-white text-blue-800
+                            px-6 py-3 rounded-xl font-bold"
+                        >
+                            Open Current Account
+                        </button>
+
+                    </div>
+
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        ${productFeature(
+                            "🏦",
+                            "Business Banking",
+                            "Banking services designed around business operations."
+                        )}
+
+                        ${productFeature(
+                            "🔄",
+                            "Transactions",
+                            "Support for frequent business banking transactions."
+                        )}
+
+                        ${productFeature(
+                            "📊",
+                            "Account Visibility",
+                            "Monitor and manage business finances digitally."
+                        )}
+
+                    </div>
+
+                </div>
+            `
+        },
+
+
+        nri: {
+
+            title: "NRI Account",
+
+            description:
+                "Banking services for customers living and working outside India.",
+
+            icon: "🌎",
+
+            content: `
+
+                <div>
+
+                    <div
+                        class="hero-gradient rounded-3xl
+                        text-white p-10 mb-10"
+                    >
+
+                        <span class="text-blue-200 font-semibold">
+                            GLOBAL BANKING
+                        </span>
+
+                        <h2 class="text-4xl font-bold mt-3">
+                            NRI Banking
+                        </h2>
+
+                        <p class="text-blue-100 max-w-2xl mt-4">
+                            Manage your banking relationship in India
+                            while living or working overseas.
+                        </p>
+
+                        <button
+                            onclick="showPage('registration')"
+                            class="mt-7 bg-white text-blue-800
+                            px-6 py-3 rounded-xl font-bold"
+                        >
+                            Start Application
+                        </button>
+
+                    </div>
+
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                        ${productFeature(
+                            "🌍",
+                            "Global Access",
+                            "Designed for customers managing finances across borders."
+                        )}
+
+                        ${productFeature(
+                            "💱",
+                            "International Banking",
+                            "Support for international banking requirements."
+                        )}
+
+                        ${productFeature(
+                            "🔐",
+                            "Secure Services",
+                            "Secure digital access to your banking relationship."
+                        )}
+
+                    </div>
+
+                </div>
+            `
+        }
+
+    };
+
+
+    /*
+     * =========================================================
+     * PRODUCT FEATURE COMPONENT
+     * =========================================================
+     */
+
+    function productFeature(icon, title, description) {
+
+        return `
+
+            <div
+                class="bg-white rounded-2xl p-7
+                border border-blue-100 card-hover"
+            >
+
+                <div class="text-3xl mb-4">
+                    ${icon}
+                </div>
+
+                <h3 class="text-xl font-bold text-blue-950">
+                    ${title}
+                </h3>
+
+                <p class="text-slate-500 mt-3 leading-relaxed">
+                    ${description}
+                </p>
+
+            </div>
+
+        `;
+    }
+
+
+    /*
+     * =========================================================
+     * PAGE NAVIGATION
+     * =========================================================
+     */
+
+    function showPage(pageName) {
+
+        const page = pages[pageName];
+
+        if (!page) {
+            return;
+        }
+
+        document
+            .getElementById("homePage")
+            .classList
+            .add("hidden");
+
+        const dynamicPage =
+            document.getElementById("dynamicPage");
+
+        dynamicPage.classList.remove("hidden");
+
+        document.getElementById("dynamicContent").innerHTML = `
+
+            <div class="mb-8">
+
+                <button
+                    onclick="showHome()"
+                    class="text-blue-600 font-semibold
+                    hover:text-blue-900"
+                >
+                    ← Back to Home
+                </button>
+
+            </div>
+
+            ${page.content}
+
+        `;
+
+        updateActiveTab(pageName);
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        closeMobileMenu();
+    }
+
+
+    /*
+     * =========================================================
+     * HOME
+     * =========================================================
+     */
+
+    function showHome() {
+
+        document
+            .getElementById("homePage")
+            .classList
+            .remove("hidden");
+
+        document
+            .getElementById("dynamicPage")
+            .classList
+            .add("hidden");
+
+        updateActiveTab("home");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        closeMobileMenu();
+    }
+
+
+    /*
+     * =========================================================
+     * ACTIVE TAB
+     * =========================================================
+     */
+
+    function updateActiveTab(pageName) {
+
+        document
+            .querySelectorAll(".nav-tab")
+            .forEach(tab => {
+
+                tab.classList.remove("active-tab");
+
+            });
+
+        const activeTab =
+            document.getElementById(`tab-${pageName}`);
+
+        if (activeTab) {
+            activeTab.classList.add("active-tab");
+        }
+    }
+
+
+    /*
+     * =========================================================
+     * MOBILE MENU
+     * =========================================================
+     */
+
+    function toggleMobileMenu() {
+
+        const menu =
+            document.getElementById("mobileNavigation");
+
+        menu.classList.toggle("hidden");
+    }
+
+
+    function closeMobileMenu() {
+
+        document
+            .getElementById("mobileNavigation")
+            .classList
+            .add("hidden");
+    }
+
+
+    /*
+     * =========================================================
+     * FORM HANDLERS
+     * =========================================================
+     *
+     * These are frontend placeholders.
+     *
+     * In the real banking application:
+     *
+     * Registration:
+     * POST /api/customers/register
+     *
+     * Login:
+     * POST /api/auth/login
+     *
+     * =========================================================
+     */
+
+    function registerUser(event) {
+
+        event.preventDefault();
+
+        alert(
+            "Registration request received. " +
+            "Backend API integration will be added next."
+        );
+
+    }
+
+
+    function loginUser(event) {
+
+        event.preventDefault();
+
+        alert(
+            "Login request received. " +
+            "Authentication API integration will be added next."
+        );
+
+    }
+
+
+    /*
+     * =========================================================
+     * APPLICATION INITIALIZATION
+     * =========================================================
+     */
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        updateActiveTab("home");
+
+    });
+
+</script>
+
+
+<!-- ========================================================= -->
+<!-- GLOBAL COMPONENT CLASSES -->
+<!-- ========================================================= -->
+
+<style>
+
+    .input-field {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        margin-bottom: 16px;
+
+        padding: 13px 15px;
+
+        border: 1px solid #dbeafe;
+
+        border-radius: 10px;
+
+        outline: none;
+
+        background: #f8fbff;
+
+        transition: all 0.2s ease;
+
+    }
+
+
+    .input-field:focus {
+
+        border-color: #2563eb;
+
+        background: white;
+
+        box-shadow:
+            0 0 0 3px rgba(37, 99, 235, 0.10);
+
+    }
+
+
+    .primary-button {
+
+        width: 100%;
+
+        padding: 13px;
+
+        border-radius: 10px;
+
+        background: #1456c3;
+
+        color: white;
+
+        font-weight: 700;
+
+        transition: all 0.2s ease;
+
+        cursor: pointer;
+
+    }
+
+
+    .primary-button:hover {
+
+        background: #0f3d91;
+
+        transform: translateY(-1px);
+
+    }
+
+
+    .mobile-nav-button {
+
+        width: 100%;
+
+        text-align: left;
+
+        padding: 12px 14px;
+
+        border-radius: 8px;
+
+        color: #334155;
+
+        font-weight: 500;
+
+    }
+
+
+    .mobile-nav-button:hover {
+
+        background: #eff6ff;
+
+        color: #1456c3;
+
+    }
+
+</style>
+
+</body>
+</html>
