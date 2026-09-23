@@ -1,0 +1,17 @@
+{
+  "name": "clahan-bank-homepage-implementation",
+  "version": "1.0.0",
+  "description": "Clahan-Bank is a blue-and-white digital banking landing page and microservice-oriented application scaffold. The front end is built with HTML and Twind CSS, while the backend services are implemented in Python using FastAPI and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.17"
+  }
+}

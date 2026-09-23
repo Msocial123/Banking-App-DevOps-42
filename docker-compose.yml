@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clahan-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-clahan_bank}
+      POSTGRES_USER: ${POSTGRES_USER:-clahan}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-clahan123}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  savings-service:
+    build: ./microservices/savings_service
+    container_name: clahan-savings
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://clahan:clahan123@postgres:5432/clahan_bank}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8001:8001"
+
+  current-service:
+    build: ./microservices/current_service
+    container_name: clahan-current
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://clahan:clahan123@postgres:5432/clahan_bank}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8002:8002"
+
+  transactions-service:
+    build: ./microservices/transactions_service
+    container_name: clahan-transactions
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://clahan:clahan123@postgres:5432/clahan_bank}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8003:8003"
+
+  frontend:
+    image: python:3.12-slim
+    container_name: clahan-frontend
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: python -m http.server 8080 --directory /app
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
