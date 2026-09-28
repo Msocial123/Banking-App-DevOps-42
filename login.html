@@ -1,231 +1,261 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Clahan Bank</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Clahan Bank</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
             min-height: 100vh;
+            background:
+                linear-gradient(
+                    120deg,
+                    #001f54,
+                    #0066cc
+                );
+
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: #f0f6ff;
+            justify-content: center;
         }
 
-        .login-container {
-            width: 400px;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        .card {
+            width: 1000px;
+            max-width: 95%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 25px 60px rgba(0,0,0,.3);
         }
 
-        .logo {
-            text-align: center;
+        .branding {
+            width: 55%;
+            padding: 70px;
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(0,40,100,.85),
+                    rgba(0,40,100,.85)
+                ),
+                url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d")
+                center/cover;
+        }
+
+        .branding h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .branding h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .branding p {
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .login {
+            width: 45%;
+            padding: 60px 50px;
+        }
+
+        .login h2 {
+            font-size: 30px;
+            color: #222;
             margin-bottom: 10px;
         }
 
-        .logo h1 {
-            color: #0b5ed7;
-            font-size: 32px;
+        .login .subtitle {
+            color: #888;
+            margin-bottom: 35px;
         }
 
-        .logo p {
-            color: #666;
-            font-size: 14px;
-            margin-top: 5px;
+        .input-box {
+            margin-bottom: 20px;
         }
 
-        .login-title {
-            text-align: center;
-            margin: 25px 0;
-        }
-
-        .login-title h2 {
-            color: #222;
-            font-size: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
+        .input-box label {
             display: block;
-            margin-bottom: 7px;
-            color: #333;
             font-size: 14px;
             font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        .form-group input {
+        .input-box input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 15px;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .input-box input:focus {
             outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #0b5ed7;
-            box-shadow: 0 0 4px rgba(11, 94, 215, 0.3);
-        }
-
-        .login-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 13px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .forgot-password {
-            color: #0b5ed7;
-            text-decoration: none;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
+            border-color: #0066cc;
         }
 
         .login-button {
             width: 100%;
-            padding: 13px;
-            background: #0b5ed7;
+            padding: 14px;
+            background: #0066cc;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .login-button:hover {
-            background: #084298;
+            background: #004d99;
         }
 
-        .register {
+        .bottom {
+            margin-top: 25px;
             text-align: center;
-            margin-top: 20px;
             font-size: 14px;
-            color: #555;
+            color: #777;
         }
 
-        .register a {
-            color: #0b5ed7;
+        .bottom a {
+            color: #0066cc;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .register a:hover {
-            text-decoration: underline;
+        @media(max-width: 750px) {
+
+            .card {
+                flex-direction: column;
+            }
+
+            .branding,
+            .login {
+                width: 100%;
+            }
+
+            .branding {
+                padding: 40px;
+            }
+
+            .login {
+                padding: 40px;
+            }
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 12px;
-            color: #888;
-        }
-
-        .error-message {
-            display: none;
-            color: #dc3545;
-            background: #fff0f0;
-            border: 1px solid #f5c2c7;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
     </style>
+
 </head>
 
 <body>
 
-    <div class="login-container">
+<div class="card">
 
-        <!-- Application Logo -->
-        <div class="logo">
-            <h1>Clahan Bank</h1>
-            <p>Secure Digital Banking</p>
-        </div>
+    <div class="branding">
 
-        <!-- Login Title -->
-        <div class="login-title">
-            <h2>Welcome Back</h2>
-        </div>
+        <h1>Clahan Bank</h1>
 
-        <!-- Dummy Error Message -->
-        <div class="error-message" id="errorMessage">
-            Invalid username or password.
-        </div>
+        <h2>Your Money. Your Future.</h2>
 
-        <!-- Login Form -->
-        <form id="loginForm">
+        <p>
+            Experience secure and convenient digital banking.
+            Manage your savings, current accounts, transfers,
+            payments and financial information from one
+            secure platform.
+        </p>
 
-            <!-- Username -->
-            <div class="form-group">
-                <label for="username">Username / Email</label>
+    </div>
+
+
+    <div class="login">
+
+        <h2>Sign In</h2>
+
+        <p class="subtitle">
+            Access your Clahan Bank account
+        </p>
+
+        <form>
+
+            <div class="input-box">
+
+                <label>
+                    Customer ID / Email
+                </label>
 
                 <input
                     type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username or email"
+                    placeholder="Enter Customer ID"
                     required
                 >
+
             </div>
 
-            <!-- Password -->
-            <div class="form-group">
-                <label for="password">Password</label>
+
+            <div class="input-box">
+
+                <label>
+                    Password
+                </label>
 
                 <input
                     type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
+                    placeholder="Enter Password"
                     required
                 >
-            </div>
-
-            <!-- Login Options -->
-            <div class="login-options">
-
-                <div class="remember-me">
-                    <input
-                        type="checkbox"
-                        id="remember"
-                        name="remember"
-                    >
-
-                    <label for="remember">Remember me</label>
-                </div>
-
-                <a href="#" class="forgot-password">
-                    Forgot Password?
-                </a>
 
             </div>
 
-            <!-- Login
+
+            <button
+                type="submit"
+                class="login-button">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <div class="bottom">
+
+            <a href="#">
+                Forgot Password?
+            </a>
+
+            <br><br>
+
+            Don't have an account?
+
+            <a href="registration.html">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
 ```
